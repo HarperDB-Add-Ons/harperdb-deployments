@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: harperdb
+  namespace: harperdb
+spec:
+  selector:
+    app: harperdb
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 9925
+...
