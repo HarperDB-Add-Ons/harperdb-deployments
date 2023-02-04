@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: harperdb
+  template:
+    metadata:
+      labels:
+        app: harperdb
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: harperdb
+        image: harperdb/harperdb
+        envFrom:
+        - secretRef:
+            name: harperdb
+        volumeMounts:
+        - name: data
+          mountPath: /opt/harperdb/hdb
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: harperdb
+...
