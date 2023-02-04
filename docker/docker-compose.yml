@@ -1,0 +1,8 @@
+services:
+  harperdb:
+    env_file: .env
+    image: harperdb/harperdb
+    ports:
+    - 9925:9925
+    volumes:
+    - $PWD/data:/opt/harperdb/hdb
