@@ -1,0 +1,14 @@
+{{- if .Values.pvc.create }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "harperdb.pvcName" . }}
+  labels:
+    {{- include "harperdb.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - {{ .Values.pvc.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.storage }}
+{{- end }}
